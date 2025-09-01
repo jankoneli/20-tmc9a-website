@@ -61,9 +61,33 @@
             margin: 0 0.5rem;
         }
         .bluets{
+            display: flex;
             width: 100%;
             background: #052cf1;
             padding: 2rem;
+        }
+        .welcome{
+            color: white;
+            margin-top: 5rem;
+            font-size: 4.5rem;
+        }
+        p{
+            color: white;
+            font-family: "Barlow";
+            font-size: 1.5rem;
+        }
+        .stats{
+            background: #F3FFC6;
+            padding: 3rem;
+        }
+        .propose{
+            outline: 0px solid white;
+            outline-offset: 0px;
+            transition: 0.2s;
+        }
+        .propose:hover{
+            outline: 1px solid #ee0e00;
+            outline-offset: 4px;
         }
     </style>
 </head>
@@ -73,14 +97,19 @@
         <a href="/students">[<span>STUDENTS</span>]</a>
         <a href="/agenda">[<span>AGENDA</span>]</a>
         <a href="/public">[<span>PUBLIC DATA</span>]</a>
+        <a href="/propose" class="propose" style="background: #ee0e00;padding: 0.5rem;color: white;transform: translateY(0.35rem);margin-left: auto;">[PROPOSE A CHANGE]</a>
     </header>
     <main>
         <div class="bluets">
-            <img src="/halftone_1756634919.png" alt="" style="width: 40rem;margin-top: 5rem;">
-            <h1></h1>p
+            <img src="/halftone_1756634919.png" alt="" style="width: 40rem;margin-top: 5rem;margin-bottom: 4rem;">
+            <div>
+                <h1 class="libre-baskerville-bold welcome">Welcome to <span style="text-decoration: underline;">Class 9A</span></h1>
+                <p style="margin-top: 2rem;width: 80%;">
+                    Just a simple website for the students, by the students. You can find upcoming exams and homework in this page.
+                </p>
+            </div>
         </div>
-        <div class>
-
+        <div class="stats">
 
         </div>
     </main>
