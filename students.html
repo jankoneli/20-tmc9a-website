@@ -40,7 +40,6 @@
             border-bottom: 1px solid #581F18;
             padding: 1rem 3rem;
             align-items: end;
-            align-content: center;
         }
         a{
             color: #F18805;
@@ -65,6 +64,12 @@
             display: flex;
             width: 100%;
             background: #052cf1;
+            padding: 2rem;
+        }
+        .yellow{
+            display: flex;
+            width: 100%;
+            background: #ffb116;
             padding: 2rem;
         }
         .welcome{
@@ -97,70 +102,28 @@
             font-family: "Barlow";
             color: rgb(243, 243, 243);
         }
-        img{
-            width: 40rem;
-            margin-bottom: 4rem;
-        }
-        @media only screen and (max-width: 600px) {
-            .bluets{
-                flex-direction: column;
-            }
-            img{
-                margin-right: 3.5rem;
-                margin-bottom: 1rem;
-                width: auto;
-            }
-            .welcome{
-                font-size: 3.5rem;
-                width: 80vw;
-            }
-            header a{
-                display: none;
-            }
-            .headertitle{
-                display: block;
-                text-align: center;
-                transform: translate(0, 0.4rem);
-            }
-            header{
-                justify-content: space-around;
-            }
+        .yellow div{
+            padding: 1rem;
+            font-family: "Barlow";
+
         }
     </style>
 </head>
 <body>
     <header>
-        <h1 class="title"><a href="/" class="headertitle"><span class="libre-baskerville-regular">TMC</span><span class="libre-baskerville-bold">9A</span></a></h1>
+        <h1 class="title"><a href="/"><span class="libre-baskerville-regular">TMC</span><span class="libre-baskerville-bold">9A</span></a></h1>
         <a href="/students">[<span>STUDENTS</span>]</a>
         <a href="/agenda">[<span>AGENDA</span>]</a>
         <a href="/public">[<span>PUBLIC DATA</span>]</a>
         <a href="/propose" class="propose" style="background: #ee0e00;padding: 0.5rem;color: white;transform: translateY(0.35rem);margin-left: auto;">[PROPOSE A CHANGE]</a>
     </header>
     <main>
-        <div class="bluets">
-            <img src="/src/halftone_1756634919.png" alt="" style="margin-top: 5rem;">
+        <div class="yellow">
             <div>
-                <h1 class="libre-baskerville-bold welcome">Welcome to <span style="text-decoration: underline;">Class 9A</span></h1>
-                <p style="margin-top: 2rem;width: 80%;">
-                    Just a simple website for the students, by the students. You can find upcoming exams and homework in this page.
-                </p>
-                <a href="/weekly" style="float: right;color: #F3FFC6;margin-right: 10rem;margin-top: 1rem;font-size: larger;">Open Weekly Schedule</a>
+                <h1>01 <span>Cornelius Christian</span></h1>
             </div>
         </div>
-        <div class="stats">
-            <div>
-                <p class="bar">Number of students</p>
-                <h1 class="bar">29 students</h1>
-            </div>
-            <div>
-                <p class="bar">Class Leader</p>
-                <h1 class="bar">Vicky</h1>
-            </div>
-            <div>
-                <p class="bar">Class Teacher</p>
-                <h1 class="bar">Pak Wawan</h1>
-            </div>
-        </div>
+        
     </main>
 </body>
 </html>
