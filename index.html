@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
     <style>
-        *{
-            padding: 0;
-            margin: 0;
+        .blue67{
+            color: #052cf1;
         }
         .libre-baskerville-regular {
         font-family: "Libre Baskerville", serif;
@@ -35,32 +35,11 @@
             background: #F3FFC6;
             overflow-x: hidden;
         }
-        header{
-            display: flex;
-            border-bottom: 1px solid #581F18;
-            padding: 1rem 3rem;
-            align-items: end;
-            align-content: center;
+
+        .barlow {
+            font-family: "Barlow";
         }
-        a{
-            color: #F18805;
-            font-family: "Barlow", sans-serif;
-            font-weight: 700;
-            font-style: normal;
-        }
-        header a{
-            text-decoration: none;
-            margin-bottom: 0.5rem;
-            margin-left: 1rem;
-        }
-        header a span{
-            color: black;
-            margin: 0 0;
-            transition: 0.4s;
-        }
-        header a span:hover{
-            margin: 0 0.5rem;
-        }
+
         .bluets{
             display: flex;
             width: 100%;
@@ -69,7 +48,6 @@
         }
         .welcome{
             color: white;
-            margin-top: 5rem;
             font-size: 4.5rem;
         }
         p{
@@ -101,63 +79,44 @@
             width: 40rem;
             margin-bottom: 4rem;
         }
-        @media only screen and (max-width: 600px) {
-            .bluets{
-                flex-direction: column;
-            }
-            img{
-                margin-right: 3.5rem;
-                margin-bottom: 1rem;
-                width: auto;
-            }
-            .welcome{
-                font-size: 3.5rem;
-                width: 80vw;
-            }
-            header a{
-                display: none;
-            }
-            .headertitle{
-                display: block;
-                text-align: center;
-                transform: translate(0, 0.4rem);
-            }
-            header{
-                justify-content: space-around;
-            }
-        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
 </head>
 <body>
-    <header>
-        <h1 class="title"><a href="/" class="headertitle"><span class="libre-baskerville-regular">TMC</span><span class="libre-baskerville-bold">9A</span></a></h1>
-        <a href="/students">[<span>STUDENTS</span>]</a>
-        <a href="/agenda">[<span>AGENDA</span>]</a>
-        <a href="/public">[<span>PUBLIC DATA</span>]</a>
-        <a href="/propose" class="propose" style="background: #ee0e00;padding: 0.5rem;color: white;transform: translateY(0.35rem);margin-left: auto;">[PROPOSE A CHANGE]</a>
+    <header class="fixed w-full flex bg-lime-50 p-5 px-10 items-end">
+        <h1 class="text-3xl text-black mr-10"><a href="/"><span class="libre-baskerville-regular">TMC</span><span class="libre-baskerville-bold">9A</span></a></h1>
+        <div class="hidden lg:block">
+            <a href="/students" class="mr-4 barlow font-bold text-orange-500">[<span class="duration-150 hover:px-2 text-black">STUDENTS</span>]</a>
+            <a href="/agenda" class="mr-4 barlow font-bold text-orange-500">[<span class="duration-150 hover:px-2 text-black">AGENDA</span>]</a>
+            <a href="/archive" class="mr-4 barlow font-bold text-orange-500">[<span class="duration-150 hover:px-2 text-black">PUBLIC ARCHIVE</span>]</a>
+        </div>
+        <a href="/propose" class="hidden lg:block barlow font-bold hover:outline-2 outline-red-500 duration-100 outline-0 outline-offset-2" style="background: #ee0e00;padding: 0.5rem;color: white;margin-left: auto;">[PROPOSE A CHANGE]</a>
     </header>
     <main>
-        <div class="bluets">
+        <div class="bluets flex-col lg:flex-row">
             <img src="/src/halftone_1756634919.png" alt="" style="margin-top: 5rem;">
             <div>
-                <h1 class="libre-baskerville-bold welcome">Welcome to <span style="text-decoration: underline;">Class 9A</span></h1>
-                <p style="margin-top: 2rem;width: 80%;">
+                <h1 class="libre-baskerville-bold mt-0 lg:mt-24 welcome">Welcome to <span style="text-decoration: underline;">Class 9A</span></h1>
+                <p style="margin-top: 2rem;width: 80%;" class="desc">
                     Just a simple website for the students, by the students. You can find upcoming exams and homework in this page.
                 </p>
-                <a href="/weekly" style="float: right;color: #F3FFC6;margin-right: 10rem;margin-top: 1rem;font-size: larger;">Open Weekly Schedule</a>
+                <a href="/weekly" class="weekly barlow font-bold bg-white blue67 mr-0 lg:mr-12 p-2 hover:text-white hover:bg-none" style="float: right;margin-top: 1rem;font-size: larger;">Open Weekly Schedule</a>
             </div>
         </div>
         <div class="stats">
             <div>
-                <p class="bar">Number of students</p>
+                <p class="bar font-bold">Number of students</p>
                 <h1 class="bar">29 students</h1>
             </div>
             <div>
-                <p class="bar">Class Leader</p>
-                <h1 class="bar">Vicky</h1>
+                <a href="/u/26" class="hover:text-white/50">
+                    <p class="bar font-bold">Class Leader</p>
+                    <h1 class="bar">Vicky</h1>
+                </a>
             </div>
             <div>
-                <p class="bar">Class Teacher</p>
+                <p class="bar font-bold">Class Teacher</p>
                 <h1 class="bar">Pak Wawan</h1>
             </div>
         </div>

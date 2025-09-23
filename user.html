@@ -32,31 +32,28 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/src/jquery.js"></script>
 </head>
 <body>
-    <header class="fixed absolute top-0 w-full flex bg-lime-50 p-5 px-10 items-end">
+    <header class="flex bg-lime-50 p-5 px-10 items-end">
         <h1 class="text-3xl mr-10"><a href="/"><span class="libre-baskerville-regular">TMC</span><span class="libre-baskerville-bold">9A</span></a></h1>
         <a href="/students" class="mr-4 barlow font-bold text-orange-500">[<span class="duration-150 hover:px-2 text-black">STUDENTS</span>]</a>
         <a href="/agenda" class="mr-4 barlow font-bold text-orange-500">[<span class="duration-150 hover:px-2 text-black">AGENDA</span>]</a>
         <a href="/pub" class="mr-4 barlow font-bold text-orange-500">[<span class="duration-150 hover:px-2 text-black">PUBLIC ARCHIVE</span>]</a>
         <a href="/propose" class="barlow font-bold hover:outline-2 outline-red-500 duration-100 outline-0 outline-offset-2" style="background: #ee0e00;padding: 0.5rem;color: white;margin-left: auto;">[PROPOSE A CHANGE]</a>
     </header>
-    <main class="m-12">
-        <h1 class="mt-24 font-bold barlow text-2xl mb-4">Students List</h1>
-
-        <div class="grid gap-4 grid-cols-5" id="sut">
-            
+    <main class="p-12 flex">
+        <img src="https://placehold.co/600x800" class="w-60 mr-4" alt="" srcset="">
+        <div>
+            <h1 class="font-bold barlow text-3xl mb-4" id="name">Students List</h1>
+            <h3 class="barlow" id="studentid">ID: --id</h3>
         </div>
     </main>
 
     <script>
         var studentsname = "Abraham Judika Marpaung,Albert Tito Ebenhaezer Simanjuntak,Antonio Tesuan Panga De Daur,Bradley William Hamonangan Situmorang,Callysta Nathania Leora Rumapea,Cornelius Christian,Danisa Aviela Dhiartanto,Devdanendra Junjie Abhipraya Ganoto,Edrei Matthew Pratama,Evan Timotius Haposan Sinulingga,Giselle Nathania Jasmine Pranandhono,Gladys Emely Angelina,Hannah Ziw Laone,Hizkia Damar Suhardi,I Gusti Ayu Sri Parvati Pradeepta Aryadharma,Kenourios Navidad Pindonta Ginting,Kevin Adiatmo Filemon,Laudri Christo Fillio David Sompotan,Marsha Lanaya Rompas,Nathanael Christian Sitorus,Renata Arikadewi BR Sitepu,Samuel Martua Sebastian Nadapdap,Theodore Philip Hasiholan Panjaitan,Theophanie Eliana Putri,Timothy Samuel SolaGracia Purba,Timotius Asyer Sihotang,Victoria Yolanda Sianturi,Widya Emeralda Simamora".split(",")
-        
-        var i = -1
-        studentsname.forEach(student => {
-            i += 1
-            document.getElementById("sut").innerHTML += '<a href="/u/--id"> <img src="https://placehold.co/600x800" class="duration-100 outline-0 outline-blue-400 hover:outline-2 outline-offset-2"> <h2 class="font-bold barlow p-1">--name</h2> </a>'.replace("--name", student).replace("--id", i)
-        });
+        document.getElementById("name").innerText = studentsname[window.location.href.split("/u/")[1]]
+        $("#studentid").text("ID: "+(parseInt(window.location.href.split("/u/")[1])+1))
     </script>
 </body>
 </html>
