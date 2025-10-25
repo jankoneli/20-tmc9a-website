@@ -44,7 +44,7 @@
     <main class="m-12">
         <h1 class="mt-24 font-bold barlow text-2xl mb-4">Students List</h1>
 
-        <div class="grid gap-4 grid-cols-5" id="sut">
+        <div class="grid gap-4 grid-cols-5" id="sut">  
             
         </div>
     </main>
@@ -55,7 +55,7 @@
         var i = -1
         studentsname.forEach(student => {
             i += 1
-            document.getElementById("sut").innerHTML += '<a href="/u/--id"> <img src="https://placehold.co/600x800" class="duration-100 outline-0 outline-blue-400 hover:outline-2 outline-offset-2"> <h2 class="font-bold barlow p-1">--name</h2> </a>'.replace("--name", student).replace("--id", i)
+            document.getElementById("sut").innerHTML += '<a href="/u/--id"> <img src="/img/--id" class="duration-100 outline-0 outline-blue-400 hover:outline-2 outline-offset-2"> <h2 class="font-bold barlow p-1">--name</h2> </a>'.replace("--name", student).replace("--id", i).replace("--id", i)
         });
     </script>
 </body>
