@@ -57,44 +57,23 @@
             $('#navbar').hide();
         </script>
     <main class="p-12 pt-24 lg:p-24 lg:pt-40">
-        <h1 class="text-3xl barlow font-bold text-slate-900">Daily Agenda</h1>
-        <div class="flex flex-col mt-4 gap-4 mb-8">
-            <div class="bg-slate-200 border-b-2 border-slate-300 p-2 px-4 font-bold barlow flex flex-col" id="1">
-                <div class="flex justify-between flex-col lg:flex-row">
-                    <h3 id="agendadate">30 October 2025 - Wednesday</h3>
-                    <a href="/agenda/update" class="cursor-pointer hover:bg-slate-400 pb-2 lg:pb-0 lg:px-2 font-light">Update Agenda <i class="bi bi-pencil-fill ml-2"></i></a>
-                </div>
-                <div>
-                    <p class="font-medium" id="agendalist"><i>Studi Sosial</i> is a 5-day activity to Temanggung, Central Java. This event lasts from 13-18 October 2025. <br>Documentation GDrive: <a href="https://drive.google.com/drive/folders/1CYnXk6wbZgzMisVD_vGY9DfwFMvn6-2n" class="break-all text-blue-500">https://drive.google.com/drive/folders/1CYnXk6wbZgzMisVD_vGY9DfwFMvn6-2n</a></p>
-                </div>
-            </div>
-        </div>
-        <h1 class="text-3xl barlow font-bold text-slate-900">Upcoming/Finished Events</h1>
-        <div class="flex flex-col mt-4 gap-4">
-            <div class="bg-slate-200 border-b-2 border-slate-300 p-2 px-4 font-bold barlow flex flex-col" id="1">
-                <div class="flex justify-between flex-col lg:flex-row">
-                    <h3>001 - Social Study (Studi Sosial)</h3>
-                    <a href="/src/docs/studisosial.pdf" class="cursor-pointer hover:bg-slate-400 pb-2 lg:pb-0 lg:px-2 font-light">Download Booklet <i class="bi bi-download pl-2"></i></a>
-                </div>
-                <div>
-                    <p class="font-medium"><i>Studi Sosial</i> is a 5-day activity to Temanggung, Central Java. This event lasts from 13-18 October 2025. <br>Documentation GDrive: <a href="https://drive.google.com/drive/folders/1CYnXk6wbZgzMisVD_vGY9DfwFMvn6-2n" class="break-all text-blue-500">https://drive.google.com/drive/folders/1CYnXk6wbZgzMisVD_vGY9DfwFMvn6-2n</a></p>
-                </div>
-            </div>
-            <div class="bg-slate-200 border-b-2 border-slate-300 p-2 px-4 font-bold barlow flex justify-between">
-                <h3>002 - ???</h3>
-                <button class="cursor-pointer hover:bg-slate-400 px-2 font-light">More<i class="bi bi-arrow-down-short"></i></button>
-            </div>
-        </div>
+        <h1 class="text-3xl barlow font-bold text-slate-900">Update Agenda</h1>
+        <input placeholder="Date" id="agendatitle" type="text" class="mt-2 border-slate-300 border-2 outline-none p-2 barlow w-64">
+        <textarea name="" id="agenda" class="border-slate-300 border-2 outline-none mt-4 p-2 barlow w-full h-32"></textarea>
 
+        <div class="flex mt-4">
+            <input placeholder="Admin Code" id="pin" type="text" class="border-slate-300 border-2 outline-none p-2 barlow w-64">
+            <button onclick="updateagenda()" class="bg-red-500 p-2 border-none text-white barlow font-bold ml-auto hover:bg-red-400"><i class="bi bi-arrow-clockwise"></i> Update Now</button>
+        </div>
     </main>
     <script src="/socket.io/socket.io.js"></script>
     <script>
     const socket = io();
-    socket.emit('requestagenda');
-    socket.on('agendadata', (agendatitle) => {
-        console.log(agendatitle)
-        $('#agendadate').text(agendatitle[0]);
-        $('#agendalist').text(agendatitle[1]);
+    function updateagenda(){
+        socket.emit('updateagenda', $('#pin').val(), $('#agenda').val(), $('#agendatitle').val());
+    }
+    socket.on('updates', () => {
+        open('/agenda', '_self')
     })
     </script>
 </body>
