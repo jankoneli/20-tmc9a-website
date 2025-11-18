@@ -94,7 +94,7 @@
     socket.on('agendadata', (agendatitle) => {
         console.log(agendatitle)
         $('#agendadate').text(agendatitle[0]);
-        $('#agendalist').text(agendatitle[1]);
+        $('#agendalist').html(agendatitle[1].replaceAll("\n", "<br/>"))
     })
     </script>
 </body>
