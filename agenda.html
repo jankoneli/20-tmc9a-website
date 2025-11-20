@@ -83,6 +83,7 @@
             <div class="bg-slate-200 border-b-2 border-slate-300 p-2 px-4 font-bold barlow flex justify-between">
                 <h3>002 - ???</h3>
                 <button class="cursor-pointer hover:bg-slate-400 px-2 font-light">More<i class="bi bi-arrow-down-short"></i></button>
+                
             </div>
         </div>
 
@@ -94,7 +95,7 @@
     socket.on('agendadata', (agendatitle) => {
         console.log(agendatitle)
         $('#agendadate').text(agendatitle[0]);
-        $('#agendalist').html(agendatitle[1].replaceAll("\n", "<br/>"))
+        $('#agendalist').html(agendatitle[1].replace("\n", "<br>"))
     })
     </script>
 </body>
