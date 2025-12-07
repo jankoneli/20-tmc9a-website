@@ -23,9 +23,32 @@ app.get("/students", (req, res) => {
     res.sendFile(__dirname+"/students.html");
 })
 
+imagelist = {
+    "primary":[],
+    "studsos":[]
+}
+
+const fs = require("fs");
+var primary = fs.readdirSync(__dirname+"/public/archive/sd");
+
+primary.forEach(file => {
+    imagelist["primary"].push(file)
+})
+
+var primary = fs.readdirSync(__dirname+"/public/archive/studsos");
+
+primary.forEach(file => {
+    imagelist["studsos"].push(file)
+})
+
+console.log(imagelist)
+
 io.on('connection', (socket) => {
     socket.on('requestagenda', () => {
         socket.emit('agendadata', [agendatitle, agendalist]);
+    })
+    socket.on('requestimage', (img) => {
+        socket.emit('imagelist', imagelist[img])
     })
     socket.on('updateagenda', (pin, datadata, datedate) => {
         console.log(parseInt(pin))
@@ -44,6 +67,14 @@ app.get("/agenda", (req, res) => {
 
 app.get("/agenda/update", (req, res) => {
     res.sendFile(__dirname+"/agendaupdate.html");
+})
+
+app.get("/archive", (req, res) => {
+    res.sendFile(__dirname+"/archive.html")
+})
+
+app.get("/archive/:id", (req, res) => {
+    res.sendFile(__dirname + "/gallery.html")
 })
 
 
