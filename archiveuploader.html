@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Archive - TMC9A</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BBH+Bogle&display=swap" rel="stylesheet">
+    <style>
+        .title {
+        font-family: "BBH Bogle", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        }
+
+    </style>
+    <script src="/src/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDvz4XrIcXHuCf089/iJAoN4lmrXJg18XnduKK6YlDHNRalv4yd1N40OKI80tFidF+rqTFKGPoWFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body class="bg-zinc-800">
+    <div class="greenlightpage text-center mt-60">
+        <h1 class="title mb-4 text-zinc-100 text-4xl">Enter Greenlight</h1>
+        <input type="password" class="border-1 border-zinc-500 rounded-md p-2 px-6 outline-none text-5xl text-zinc-100" id="greenlight">
+        <br>
+        <button class="title text-zinc-100 border-1 border-zinc-100 bg-none cursor-pointer p-3 px-6 text-2xl mt-4 hover:bg-zinc-100 hover:text-zinc-800" onclick="verify()">VERIFY</button>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        function verify(){
+            socket.send("greenlight", $("#greenlight").val())
+        }
+        var salt = CryptoJS.lib.WordArray.random(128 / 8);
+        var key256Bits = CryptoJS.PBKDF2($("#greenlight").val(), salt, {
+            keySize: 256 / 32
+        });
+        alert(salt)
+    </script>
+</body>
+</html>

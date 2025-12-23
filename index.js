@@ -97,6 +97,10 @@ app.get("/u/:id", (req, res) => {
     res.sendFile(__dirname+"/user.html")
 })
 
+app.get("/upload/archive", (req, res) => {
+    res.sendFile(__dirname+"/archiveuploader.html")
+})
+
 app.get("/img/:id", (req, res) => {
     if(Object.keys(imgstud).includes(req.params.id.toString())){
         res.sendFile(__dirname+"/img/"+imgstud[parseInt(req.params.id)]);
