@@ -6,7 +6,14 @@ app.use("/src", express.static("public"))
 
 const fs = require("fs");
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    maxHttpBufferSize: 5e7 // 50 MB
+});
+
+const { createHash } = require('crypto');
+
+const { v7 } = require( 'uuid');
+
 
 var agendatitle = "Agenda not updated";
 var agendalist = "";
@@ -34,11 +41,16 @@ app.get("/students", (req, res) => {
     res.sendFile(__dirname+"/students.html");
 })
 
+app.post("/profile", (req, res) => {
+    res.send("File uploaded");
+});
+
 imagelist = {
     "primary":[],
     "studsos":[]
 }
 
+masterkeyupload = "9a0212f6f690abd3af50de832bb4154f5072eb9e1c1b15894f30df4ff08c5c11"
 
 var primary = fs.readdirSync(__dirname+"/public/archive/sd");
 
@@ -55,6 +67,7 @@ primary.forEach(file => {
 console.log(imagelist)
 
 io.on('connection', (socket) => {
+    console.log('a user connected');
     socket.on('requestagenda', () => {
         socket.emit('agendadata', [agendatitle, agendalist]);
     })
@@ -69,6 +82,25 @@ io.on('connection', (socket) => {
             console.log("update success");
             socket.emit('updates')
         }
+    })
+    socket.on('uploadrequest', (data, file) => {
+        console.log(file);
+        if(createHash('sha256').update(createHash('sha256').update(data.key).digest('hex')).digest('hex') == masterkeyupload){
+            console.log("upload success");
+            uuidid = v7();
+            fs.writeFileSync(__dirname+"/public/archive/"+data.category+"/"+uuidid+".jpg", file);
+            fs.appendFileSync(__dirname+"/alttext", "\n"+uuidid+","+data.description);
+            socket.emit('uploadsuccess');
+            alttext = {};
+            var alttextlines = fs.readFileSync(__dirname+"/alttext")
+            alttextlines.toString().split("\n").forEach(line => {
+                alttext[line.split(",")[0]] = line.split(",")[1].replace("\r", "")
+            });
+        }else{
+            console.log("upload failed");
+            console.log(createHash('sha256').update(createHash('sha256').update(data.key).digest('hex')).digest('hex'))
+        }
+        console.log(createHash('sha256').update(createHash('sha256').update(data.key).digest('hex')).digest('hex'))
     })
 })
 

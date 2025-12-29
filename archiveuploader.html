@@ -19,24 +19,56 @@
     <script src="/src/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDvz4XrIcXHuCf089/iJAoN4lmrXJg18XnduKK6YlDHNRalv4yd1N40OKI80tFidF+rqTFKGPoWFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<body class="bg-zinc-800">
-    <div class="greenlightpage text-center mt-60">
-        <h1 class="title mb-4 text-zinc-100 text-4xl">Enter Greenlight</h1>
-        <input type="password" class="border-1 border-zinc-500 rounded-md p-2 px-6 outline-none text-5xl text-zinc-100" id="greenlight">
-        <br>
-        <button class="title text-zinc-100 border-1 border-zinc-100 bg-none cursor-pointer p-3 px-6 text-2xl mt-4 hover:bg-zinc-100 hover:text-zinc-800" onclick="verify()">VERIFY</button>
-    </div>
+<body class="bg-zinc-800 p-0 m-0">
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io();
-        function verify(){
-            socket.send("greenlight", $("#greenlight").val())
+    <div class="p-5">
+        <a href="/" class="text-zinc-100 title text-xl hover:text-zinc-300">< RETURN TO HOMEPAGE</a>
+    </div>
+    <div class="p-4 bg-zinc-200 title pt-5" style="transform: translate(-50%, -50%);position: absolute;top: 50%;left: 50%;">
+        <div class="">
+            <input type="file" name="avatar" class="hidden" id="files"/>
+            <label for="files" class="bg-zinc-900 text-zinc-100 p-2 text-center w-full lg:px-50 cursor-pointer hover:bg-zinc-700 lg:text-3xl text-md">Select archive</label>
+        </div>
+        <div id="filelist" class="mt-2"></div>
+        <input type="text" placeholder="Description for image" class="outline-none w-full" id="desc">
+        <input type="password" name="" id="greenlight" placeholder="Enter greenlight key" class="mt-8 p-2 px-4 w-full text-2xl outline-none border-b-1 border-zinc-800"/>
+        <div class="flex justify-between mt-2">
+            <select name="" id="category" class="px-4 text-xl outline-none bg-zinc-300">
+                <option value="sd">Primary School (SD)</option>
+                <option value="studsos">Social Study (Studi Sosial)</option>
+            </select>
+            <button class="bg-green-500 mt-2 p-2 text-xl hover:opacity-80 cursor-pointer" id="publishbtn">Publish</button>
+        </div>
+    </div>
+   <script>
+    $("#files").on("change", () => {
+        $("#filelist").html("");
+        for(i=0; i<$("#files").prop("files").length; i++){
+            if(i<10){
+                $("#filelist").append("<div class='border-b-1 border-zinc-800 p-2 bg-zinc-300 text-zinc-900 text-xl'>"+$("#files").prop("files")[i].name+"</div>");
+            }else if(i==10){
+                $("#filelist").append("<div class='border-b-1 border-zinc-800 p-2 bg-zinc-300 text-zinc-900 text-xl'>...</div>");
+            }
+            
         }
-        var salt = CryptoJS.lib.WordArray.random(128 / 8);
-        var key256Bits = CryptoJS.PBKDF2($("#greenlight").val(), salt, {
-            keySize: 256 / 32
-        });
-        alert(salt)
-    </script>
+    })
+    const socket = io();
+    $("#publishbtn").on("click", (e) => {
+        e.preventDefault();
+        socket.emit('uploadrequest', {
+            key: $("#greenlight").val(),
+            category: $("#category").val(),
+            description: $("#desc").val()
+        }, $("#files").prop("files")[0]);
+    })
+    socket.on('uploadsuccess', () => {
+        $('#greenlight').val("");
+        $('#desc').val("");
+        $('#files').val("");
+        alert("Upload successful!");
+        window.location.reload();
+    })
+   </script>
+    
 </body>
 </html>

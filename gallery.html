@@ -53,6 +53,8 @@
     socket.emit('requestimage', window.location.href.split("/").at(-1));
     $("#ititle").text(titles[window.location.href.split("/").at(-1)])
     socket.on("imagelist", (imglist, alttext) => {
+        console.log(alttext);
+        console.log(imglist);
         imglist.forEach(element => {
             $("#lightgallery").append("<a href='/src/archive/--folder/--filename'><img src='/src/archive/--folder/--filename' alt='--alt' srcset=''></a>".replaceAll("--filename", element).replaceAll("--folder", filenames[window.location.href.split("/").at(-1)]).replaceAll("--alt", alttext[element.split(".")[0]]))
         });
