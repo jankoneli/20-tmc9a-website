@@ -16,6 +16,7 @@ const { v7 } = require( 'uuid');
 
 const {marked} = require("marked")
 
+var visitor = 0
 
 var agendatitle = "Agenda not updated";
 var agendalist = "";
@@ -36,7 +37,12 @@ alttextlines.toString().split("\n").forEach(line => {
 console.log(alttext)
 
 app.get("/", (req, res) => {
+    visitor += 1;
     res.sendFile(__dirname+"/index.html");
+})
+
+app.get("/count", (req, res) => {
+    res.send("Visitors since last restart: "+visitor.toString())
 })
 
 app.get("/students", (req, res) => {
