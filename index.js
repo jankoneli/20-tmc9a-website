@@ -14,6 +14,8 @@ const { createHash } = require('crypto');
 
 const { v7 } = require( 'uuid');
 
+const {marked} = require("marked")
+
 
 var agendatitle = "Agenda not updated";
 var agendalist = "";
@@ -39,6 +41,10 @@ app.get("/", (req, res) => {
 
 app.get("/students", (req, res) => {
     res.sendFile(__dirname+"/students.html");
+})
+
+app.get("/tryout/:id", (req, res) => {
+    res.sendFile(__dirname+"/tryout.html")
 })
 
 app.post("/profile", (req, res) => {
@@ -73,6 +79,10 @@ io.on('connection', (socket) => {
     })
     socket.on('requestimage', (img) => {
         socket.emit('imagelist', imagelist[img], alttext)
+    })
+    socket.on("requestTryout", (subject) => {
+        var markedtext = marked.parse(fs.readFileSync(__dirname+"/tryout/"+subject+".md").toString())
+        socket.emit("marked", markedtext)
     })
     socket.on('updateagenda', (pin, datadata, datedate) => {
         console.log(parseInt(pin))
