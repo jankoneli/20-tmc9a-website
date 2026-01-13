@@ -29,10 +29,15 @@ var alttext = {
 
 }
 
-var alttextlines = fs.readFileSync(__dirname+"/alttext")
-alttextlines.toString().split("\n").forEach(line => {
-    alttext[line.split(",")[0]] = line.split(",")[1].replace("\r", "")
-})
+function updatealt(){
+    var alttextlines = fs.readFileSync(__dirname+"/alttext")
+    alttextlines.toString().split("\n").forEach(line => {
+        alttext[line.split(",")[0]] = line.split(",")[1].replace("\r", "")
+    })
+}
+
+updatealt()
+
 
 console.log(alttext)
 
@@ -57,14 +62,19 @@ app.post("/profile", (req, res) => {
     res.send("File uploaded");
 });
 
-imagelist = {
+var imagelist = {
     "primary":[],
     "studsos":[]
 }
 
-masterkeyupload = "9a0212f6f690abd3af50de832bb4154f5072eb9e1c1b15894f30df4ff08c5c11"
+masterkeyupload = "133c874210964c6b2bf71aeba5c5987db34765ca1d69be2bc6030609b1e83f65"
 
-var primary = fs.readdirSync(__dirname+"/public/archive/sd");
+function updateimg(){
+    imagelist = {
+    "primary":[],
+    "studsos":[]
+}
+    var primary = fs.readdirSync(__dirname+"/public/archive/sd");
 
 primary.forEach(file => {
     imagelist["primary"].push(file)
@@ -77,6 +87,9 @@ primary.forEach(file => {
 })
 
 console.log(imagelist)
+}
+updateimg()
+
 
 io.on('connection', (socket) => {
     console.log('a user connected');
@@ -112,11 +125,12 @@ io.on('connection', (socket) => {
             alttextlines.toString().split("\n").forEach(line => {
                 alttext[line.split(",")[0]] = line.split(",")[1].replace("\r", "")
             });
+            updatealt();
+            updateimg();
         }else{
             console.log("upload failed");
             console.log(createHash('sha256').update(createHash('sha256').update(data.key).digest('hex')).digest('hex'))
         }
-        console.log(createHash('sha256').update(createHash('sha256').update(data.key).digest('hex')).digest('hex'))
     })
 })
 
