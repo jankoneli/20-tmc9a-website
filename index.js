@@ -138,6 +138,10 @@ app.get("/agenda", (req, res) => {
     res.sendFile(__dirname+"/agenda.html");
 })
 
+app.get("/contact", (req, res) => {
+    res.sendFile(__dirname+"/contact.html");
+})
+
 app.get("/agenda/update", (req, res) => {
     res.sendFile(__dirname+"/agendaupdate.html");
 })
