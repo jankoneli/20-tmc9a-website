@@ -3,6 +3,7 @@ const app = express();
 const { createServer } = require('node:http');
 const { Server } = require("socket.io");
 app.use("/src", express.static("public"))
+app.use("/riverside", express.static("riverside"))
 
 const fs = require("fs");
 const server = createServer(app);
@@ -134,6 +135,9 @@ io.on('connection', (socket) => {
     })
 })
 
+app.get("/riverside", (req, res) => {
+    res.sendFile(__dirname+"/riverside.html")
+})
 app.get("/agenda", (req, res) => {
     res.sendFile(__dirname+"/agenda.html");
 })
