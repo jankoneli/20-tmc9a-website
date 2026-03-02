@@ -63,6 +63,10 @@ app.post("/profile", (req, res) => {
     res.send("File uploaded");
 });
 
+app.get("/yearbook", (req, res) => {
+    res.sendFile(__dirname+"/yearbook.html")
+});
+
 var imagelist = {
     "primary":[],
     "studsos":[]
