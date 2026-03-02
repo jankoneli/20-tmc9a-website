@@ -1,6 +1,7 @@
 node_modules/
 img/
-public/
+public/ 
 ./alttext
 alttext
 archives/
+!*.pdf
