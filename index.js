@@ -167,6 +167,10 @@ app.get("/weekly", (req, res) => {
     res.sendFile(__dirname+"/weekly.html");
 })
 
+app.get("/tools", (req, res) => {
+    res.sendFile(__dirname+"/tools.html");
+})
+
 app.get("/u/:id", (req, res) => {
     res.sendFile(__dirname+"/user.html")
 })
